@@ -36,4 +36,5 @@ jobs:
           ANTHROPIC_API_KEY: sk-ant-api03-offline-test-only
         with:
           github_token: ${{ github.token }}
+          path_to_claude_code_executable: ${{ runner.temp }}/fake-claude
           claude_args: "--model claude-haiku-4-5"
