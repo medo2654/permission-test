@@ -1,0 +1,39 @@
+name: SEC-08 actual tag-mode action reachability
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  actual-tag-action:
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '@claude')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout shallow base
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Create harmless Claude executable
+        run: |
+          cat > "$RUNNER_TEMP/fake-claude" <<'EOF'
+          #!/usr/bin/env bash
+          echo "FAKE_CLAUDE_EXECUTED=true"
+          exit 0
+          EOF
+          chmod +x "$RUNNER_TEMP/fake-claude"
+
+      - name: Run actual forked tag-mode action
+        id: actual
+        uses: medo2654/claude-code-action@main
+        env:
+          PATH_TO_CLAUDE_CODE_EXECUTABLE: ${{ runner.temp }}/fake-claude
+          ANTHROPIC_API_KEY: sk-ant-api03-offline-test-only
+        with:
+          github_token: ${{ github.token }}
+          claude_args: "--model claude-haiku-4-5"
