@@ -1,0 +1,10 @@
+probe	Read real PR commit count	2026-08-28T00:40:57.9960778Z ^[[36;1mecho "REAL_PR_COMMITS=${commits}"^[[0m
+probe	Read real PR commit count	2026-08-28T00:40:57.9961501Z ^[[36;1mecho "ACTION_FORMULA_DEPTH=$(( commits < 20 ? 20 : commits ))"^[[0m
+probe	Read real PR commit count	2026-08-28T00:40:58.4868387Z REAL_PR_COMMITS=1001
+probe	Read real PR commit count	2026-08-28T00:40:58.4870079Z ACTION_FORMULA_DEPTH=1001
+probe	Compare local fetch depths	2026-08-28T00:40:58.4980380Z ^[[36;1mecho "BOUNDED_DEPTH_20_COMMITS=${bounded}"^[[0m
+probe	Compare local fetch depths	2026-08-28T00:40:58.4981974Z ^[[36;1mecho "UNBOUNDED_INPUT_DEPTH_1000_COMMITS=${expanded}"^[[0m
+probe	Compare local fetch depths	2026-08-28T00:40:58.4983650Z ^[[36;1mecho "NETWORK_TARGET=github_actions_runner_only"^[[0m
+probe	Compare local fetch depths	2026-08-28T00:40:59.1828611Z BOUNDED_DEPTH_20_COMMITS=20
+probe	Compare local fetch depths	2026-08-28T00:40:59.1829157Z UNBOUNDED_INPUT_DEPTH_1000_COMMITS=1000
+probe	Compare local fetch depths	2026-08-28T00:40:59.1829740Z NETWORK_TARGET=github_actions_runner_only
